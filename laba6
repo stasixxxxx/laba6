@@ -1,0 +1,129 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <locale.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int task1(void);
+int task2(void);
+int task3(void);
+
+int main(void)
+{
+    setlocale(LC_ALL, "RUS");
+    int main_choice;
+
+    do
+    {
+        printf("=========================================\n");
+        printf("          ГЛАВНОЕ МЕНЮ РАБОТЫ            \n");
+        printf("=========================================\n");
+        printf("1. Выполнить Задачу 1 (Високосный год)\n");
+        printf("2. Выполнить Задачу 2 (Вычисление функции F(x))\n");
+        printf("3. Выполнить Задачу 3 (Анализ трехзначного числа)\n");
+        printf("0. Выход из программы\n");
+        printf("-----------------------------------------\n");
+        printf("Выберите задание: ");
+        
+        if (scanf("%d", &main_choice) != 1)
+        {
+            while (getchar() != '\n'); 
+            main_choice = -1;
+        }
+
+        switch (main_choice)
+        {
+            case 1: 
+                task1(); 
+                break;
+            case 2: 
+                task2(); 
+                break;
+            case 3: 
+                task3(); 
+                break;
+            case 0: 
+                printf("Программа завершена.\n"); 
+                break;
+            default: 
+                printf("Неверный выбор! Попробуйте снова.\n\n"); 
+                system("pause");
+                break;
+        }
+    } while (main_choice != 0);
+
+    return 0;
+}
+
+int task1(void)
+{
+    int years;
+    
+    printf("\n--- Задача 1 ---\n");
+    printf("Введите год: ");
+    scanf("%d", &years);
+    
+    if ((years % 4 == 0 && years % 100 != 0) || (years % 400 == 0))
+    {
+        printf("год %d високосный\n", years);
+    }
+    else
+    {
+        printf("год %d не високосный\n", years);
+    }
+    
+    system("pause");
+    return 0;
+}
+
+int task2(void)
+{
+    double x;
+
+    printf("\n--- Задача 2 ---\n");
+    printf("Введите x: ");
+    scanf("%lf", &x);
+    
+    printf("x = %.2f, F(x) = %.2f\n", x, (x >= 8) ? (-x * x + x - 9) : (1 / (pow(x, 4) - 6)));
+    
+    system("pause");
+    return 0;
+}
+
+int task3(void)
+{
+    int num, h, t, u;
+    int has_matches = 0;
+    
+    printf("\n--- Задача 3 ---\n");
+    printf("Введите трехзначное число: ");
+    scanf("%d", &num);
+    
+    h = num / 100;          
+    t = (num / 10) % 10;    
+    u = num % 10;           
+    
+    if (u == t)
+    {
+        printf("число единиц и десятков равно\n");
+        has_matches = 1;
+    }
+    if (h == t)
+    {
+        printf("число сотен и десятков равно\n");
+        has_matches = 1;
+    }
+    if (h == u)
+    {
+        printf("число сотен и единиц равно\n");
+        has_matches = 1;
+    }
+    
+    if (!has_matches)
+    {
+        printf("совпадающих разрядов нет\n");
+    }
+    
+    system("pause");
+    return 0;
+}
